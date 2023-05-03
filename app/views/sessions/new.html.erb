@@ -1,0 +1,21 @@
+<h1>Sign In</h1>
+
+<%= form_with(scope: :session, url: login_path ) do |form| %>
+
+  <br>
+
+
+  <div>
+    <%= form.label :email, style: "display: block", class: '' %>
+    <%= form.email_field :email, placeholder: 'Enter your email address', class:'form-control' %>
+  </div>
+  <br>
+  <div>
+    <%= form.label :password, style: "display: block", class: '' %>
+    <%= form.password_field :password, placeholder: 'Enter your password', class:'form-control' %>
+  </div>
+  <br>
+  <div>
+    <%= form.submit "Sign In",  class: 'btn btn-success'%>
+  </div>
+<% end %>
