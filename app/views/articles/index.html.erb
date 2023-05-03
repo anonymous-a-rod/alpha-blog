@@ -10,6 +10,7 @@
     </tr>
   </thead>
   <tbody id="articles">
+    <%= will_paginate @articles, class:'pagination' %>
     <% @articles.each do |article| %>
       <%= render partial: 'articles/article_row_item', locals: { article: article } %>
     <% end %>
