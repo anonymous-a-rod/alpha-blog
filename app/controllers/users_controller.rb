@@ -8,13 +8,17 @@ class UsersController < ApplicationController
   def edit
   end
 
+  def show
+    @articles = @user.articles
+  end
+
   # POST /articles or /articles.json
   def create
     @user = User.new(user_params)
     respond_to do |format|
       if @user.save
         format.html do
-          redirect_to articles_path,
+          redirect_to user_path(@user),
                       notice: "Welcome to the Alpha Blog #{@user.username}, you have successfully signed up"
         end
         format.json { render :show, status: :created, location: @user }
