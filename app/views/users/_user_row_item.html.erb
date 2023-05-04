@@ -3,6 +3,8 @@
   <td><%= user.email %></td>
   <td><%= user.articles.count %></td>
   <td class="text-center"><%= link_to "Show", user, class: 'btn btn-primary' %></td>
-  <td class="text-center"><%= link_to "Edit", edit_user_path(user), class: 'btn btn-secondary' %></td>
-  <td class="text-center"><%= button_to "Delete", user_path(user), method: :delete, class: 'btn btn-danger'%></td>
+  <% if logged_in? && current_user == user %>
+    <td class="text-center"><%= link_to "Edit", edit_user_path(user), class: 'btn btn-secondary' %></td>
+    <td class="text-center"><%= button_to "Delete", user_path(user), method: :delete, class: 'btn btn-danger'%></td>
+  <% end %>
 </tr>

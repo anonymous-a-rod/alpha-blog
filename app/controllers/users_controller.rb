@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[show edit update destroy]
+  before_action :set_user, only: %i[ show edit update destroy ]
+  before_action :require_user, only: %i[ edit update ]
+  before_action :require_same_user, only: %i[ edit update ]
 
   def new
     @user = User.new
@@ -20,6 +22,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     respond_to do |format|
       if @user.save
+        session[:user_id] = @user.id
         format.html do
           redirect_to user_path(@user),
                       notice: "Welcome to the Alpha Blog #{@user.username}, you have successfully signed up"
@@ -48,6 +51,7 @@ class UsersController < ApplicationController
   # DELETE /users/1 or /users/1.json
   def destroy
     @user.destroy
+    session[:user_id] = nil
 
     respond_to do |format|
       format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
@@ -63,5 +67,12 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:username, :email, :password)
+  end
+
+  def require_same_user
+    if current_user != @user
+      flash[:notice] = 'You are not permitted to edit other accounts'
+      redirect_to @user
+    end
   end
 end
