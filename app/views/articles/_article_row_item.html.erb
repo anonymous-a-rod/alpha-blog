@@ -3,7 +3,7 @@
   <td><%= article.description %></td>
   <td><%= article.user.username %></td>
   <td class="text-center"><%= link_to "Show", article, class: 'btn btn-primary' %></td>
-  <% if logged_in? && article.user == current_user %>
+  <% if logged_in? &&  (current_user == article.user || current_user.admin? ) %>
   <td class="text-center"><%= link_to "Edit", edit_article_path(article), class: 'btn btn-secondary' %></td>
   <td class="text-center"><%= button_to "Delete", article_path(article), method: :delete, class: 'btn btn-danger'%></td>
   <% end %>

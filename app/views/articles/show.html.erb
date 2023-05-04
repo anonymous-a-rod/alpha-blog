@@ -1,13 +1,13 @@
 <p style="color: green"><%= notice %></p>
 <%= render @article %>
 <div>
-  <% if logged_in? && current_user == @article.user %>
+  <% if logged_in? && (current_user == @article.user || current_user.admin? )%>
     <%= link_to "Edit this article", edit_article_path(@article), class: 'btn btn-secondary' %>
   <% end %>
   <%= link_to "Back to articles", articles_path, class: 'btn btn-primary' %>
   <br />
   <br>
-  <% if logged_in? && current_user == @article.user %>
+  <% if logged_in? &&  (current_user == @article.user || current_user.admin? ) %>
     <%= button_to "Destroy this article", @article, method: :delete, class: 'btn btn-danger' %>
   <% end %>
 </div>
