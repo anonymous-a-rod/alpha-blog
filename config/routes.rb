@@ -12,4 +12,6 @@ Rails.application.routes.draw do
   
   root 'pages#home'
 
+  resources :categories, except: [ :destroy ]
+
 end
