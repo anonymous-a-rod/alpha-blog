@@ -1,0 +1,19 @@
+
+<h1>Categories</h1>
+<table class="table table-striped table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Category</th>
+    </tr>
+  </thead>
+  <tbody id="categories">
+    <%= will_paginate @categories, class:'pagination' %>
+    <% @categories.each do |category| %>
+      <tr>
+        <td><%= link_to category.name, category_path(category) %></td>
+      </tr>
+      <% end %>
+
+  </tbody>
+</table>
+
